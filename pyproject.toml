@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "machine_learning_02"
+version = "0.1.0"
+description = ""
+authors = ["Jim Koch <jimkoch@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+tensorflow = "2.2"
+tensorflow-datasets = "^4.1.0"
+numpy = "1.19.3"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+main = "machine_learning_02.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
