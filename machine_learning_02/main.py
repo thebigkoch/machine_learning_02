@@ -98,29 +98,69 @@ def main():
 
     # Create my polynomial model.
     model_linear = tf.keras.Sequential([
-        tf.keras.layers.Dense(units=3, input_shape=(3,)),   # input layer
-        tf.keras.layers.Dense(5),  # hidden layer
-        tf.keras.layers.Dense(5),  # hidden layer
-        tf.keras.layers.Dense(5),  # hidden layer
-        tf.keras.layers.Dense(1) # output layer
+        tf.keras.layers.Dense(units=3, input_shape=[3,]),   # input layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=100),  # hidden layer
+        tf.keras.layers.Dense(units=1) # output layer
     ])
 
-    model_linear.compile(optimizer='adam',
-                  loss=tf.keras.losses.MeanSquaredError(),
-                  metrics=['accuracy'])
+    model_linear.compile(loss='mean_squared_error',
+                optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+                metrics=['accuracy'])
 
     # Create my non-linear model using ReLU.
     model_relu = tf.keras.Sequential([
-        tf.keras.layers.Dense(units=3, input_shape=(3,)),   # input layer
-        tf.keras.layers.Dense(5, activation=tf.nn.relu),  # hidden layer
-        tf.keras.layers.Dense(5, activation=tf.nn.relu),  # hidden layer
-        tf.keras.layers.Dense(5, activation=tf.nn.relu),  # hidden layer
-        tf.keras.layers.Dense(1) # output layer
+        tf.keras.layers.Dense(units=3, input_shape=[3,]),   # input layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
+        tf.keras.layers.Dense(units=1) # output layer
     ])
 
-    model_relu.compile(optimizer='adam',
-                  loss=tf.keras.losses.MeanSquaredError(),
-                  metrics=['accuracy'])
+    model_relu.compile(loss='mean_squared_error',
+                optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+                metrics=['accuracy'])
 
     # Train my models.
     model_linear.fit(train_dataset, epochs=5, steps_per_epoch=math.ceil(train_dataset_len / BATCH_SIZE))
