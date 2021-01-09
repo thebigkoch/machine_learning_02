@@ -102,31 +102,11 @@ def main():
         tf.keras.layers.Dense(units=100),  # hidden layer
         tf.keras.layers.Dense(units=100),  # hidden layer
         tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
-        tf.keras.layers.Dense(units=100),  # hidden layer
         tf.keras.layers.Dense(units=1) # output layer
     ])
 
-    model_linear.compile(loss='mean_squared_error',
-                optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    model_linear.compile(loss=tf.losses.MeanAbsolutePercentageError(),
+                optimizer=tf.keras.optimizers.Adam(learning_rate=0.01),
                 metrics=['accuracy'])
 
     # Create my non-linear model using ReLU.
@@ -135,43 +115,23 @@ def main():
         tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
         tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
         tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
-        tf.keras.layers.Dense(units=100, activation=tf.nn.elu),  # hidden layer
         tf.keras.layers.Dense(units=1) # output layer
     ])
 
-    model_relu.compile(loss='mean_squared_error',
-                optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    model_relu.compile(loss=tf.losses.MeanAbsolutePercentageError(),
+                optimizer=tf.keras.optimizers.Adam(learning_rate=0.01),
                 metrics=['accuracy'])
 
     # Train my models.
-    model_linear.fit(train_dataset, epochs=5, steps_per_epoch=math.ceil(train_dataset_len / BATCH_SIZE))
-    model_relu.fit(train_dataset, epochs=5, steps_per_epoch=math.ceil(train_dataset_len / BATCH_SIZE))
+    model_linear.fit(train_data_features, train_data_values, epochs=100)
+    model_relu.fit(train_data_features, train_data_values, epochs=100)
 
     # Check the accuracy of the polynomial model with the test dataset.
-    test_loss, test_accuracy = model_linear.evaluate(test_dataset, steps=math.ceil(test_dataset_len / BATCH_SIZE))
+    test_loss, test_accuracy = model_linear.evaluate(test_data_features, test_data_values)
     print('accuracy(model_linear):', test_accuracy)
 
     # Check the accuracy of the non-linear model with the test dataset.
-    test_loss, test_accuracy = model_relu.evaluate(test_dataset, steps=math.ceil(test_dataset_len / BATCH_SIZE))
+    test_loss, test_accuracy = model_relu.evaluate(test_data_features, test_data_values)
     print('accuracy(model_relu):', test_accuracy)
 
 if __name__ == "__main__":
